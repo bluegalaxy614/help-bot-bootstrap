@@ -78,8 +78,9 @@
         <link rel="stylesheet" type="text/css" href="assets/vendor/aos/aos.css"> 
         <!-- Theme CSS -->         
         <link rel="stylesheet" type="text/css" href="assets/css/style.css"> 
+        <script src="assets/js/auth.js"></script>
     </head>     
-    <body> 
+    <body onload="checkAuth(); updateUserProfile();"> 
         <!-- Header START -->         
         <header class="navbar-light navbar-sticky"> 
             <!-- Logo Nav START -->             
@@ -608,5 +609,8 @@ Footer END -->
         <script src="assets/vendor/aos/aos.js"></script>         
         <!-- Template Functions -->         
         <script src="assets/js/functions.js"></script>         
+        <div class="user-profile">
+            <!-- Profile content will be dynamically inserted here -->
+        </div>
     </body>     
 </html>

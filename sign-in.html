@@ -76,6 +76,8 @@
         <link rel="stylesheet" type="text/css" href="assets/vendor/bootstrap-icons/bootstrap-icons.css"> 
         <!-- Theme CSS -->         
         <link rel="stylesheet" type="text/css" href="assets/css/style.css"> 
+        <script src="https://accounts.google.com/gsi/client" async defer></script>
+        <script src="assets/js/auth.js"></script>
     </head>     
     <body> 
         <!-- **************** MAIN CONTENT START **************** -->         
@@ -147,15 +149,23 @@
                                             <p class="small position-absolute top-50 start-50 translate-middle bg-body px-5">Or</p> 
                                         </div>                                         
                                         <!-- Social btn -->                                         
-                                        <div class="col-xxl-6 d-grid"> <a href="#" class="btn bg-google mb-2 mb-xxl-0"><i class="fab fa-fw fa-google text-white me-2"></i>Login with Google</a> 
+                                        <div class="col-xxl-6 d-grid"> <button type="button" class="btn bg-google mb-2 mb-xxl-0" onclick="signInWithGoogle()"><i class="fab fa-fw fa-google text-white me-2"></i>Login with Google</button> 
                                         </div>                                         
                                         <!-- Social btn -->                                         
-                                        <div class="col-xxl-6 d-grid"> <a href="#" class="btn bg-dark mb-0" style="color: white;"><i class="fab fa-fw fa-github me-2"></i>Login with GitHub</a> 
+                                        <div class="col-xxl-6 d-grid"> <button type="button" class="btn bg-dark mb-0" style="color: white;"><i class="fab fa-fw fa-github me-2"></i>Login with GitHub</button> 
                                         </div>                                         
                                     </div>                                     
                                     <!-- Sign up link -->                                     
                                     <div class="mt-4 text-center"> <span>Don't have an account? <a href="sign-up.html">Signup here</a></span> 
                                     </div>                                     
+                                    <!-- Google Sign In button container -->
+                                    <div class="row">
+                                        <div class="col-12 mb-3">
+                                            <div id="googleSignInBtn"></div>
+                                        </div>
+                                        <!-- Error message container -->
+                                        <div id="auth-error" class="alert alert-danger" style="display: none;"></div>
+                                    </div>
                                 </div>                                 
                             </div>                             
                             <!-- Row END -->                             
@@ -173,5 +183,23 @@
         <script src="assets/vendor/bootstrap/dist/js/bootstrap.bundle.min.js"></script>         
         <!-- Template Functions -->         
         <script src="assets/js/functions.js"></script>         
+        <script>
+            // Initialize Google OAuth when page loads
+            window.onload = function() {
+                initGoogleAuth();
+                
+                // Check if there's an error message in URL
+                const urlParams = new URLSearchParams(window.location.search);
+                const error = urlParams.get('error');
+                if (error) {
+                    showError(decodeURIComponent(error));
+                }
+                
+                // If user is already logged in, redirect to dashboard
+                if (checkAuth()) {
+                    window.location.href = 'dashboard.html';
+                }
+            }
+        </script>
     </body>     
 </html>
